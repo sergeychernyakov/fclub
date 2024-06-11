@@ -1,0 +1,90 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f9f9f9;
+  font-family: 'Roboto', sans-serif;
+}
+
+.stadium {
+  width: 600px;
+  height: 400px;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.field {
+  width: 90%;
+  height: 90%;
+  background-color: #7ed957;
+  border-radius: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+.seat {
+  width: 30px;
+  height: 30px;
+  background-color: #007bff;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.seat.selected {
+  background-color: #ff073a;
+}
+
+.extra-seats {
+  position: absolute;
+  width: calc(100% + 20px);
+  display: flex;
+  justify-content: space-between;
+  bottom: -20px;
+  left: -10px;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
+.exit-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.exit-btn:hover {
+  background-color: #555;
+}
+
+.error-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ff073a;
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  z-index: 9999;
+  display: none;
+}

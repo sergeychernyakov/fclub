@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>стадион</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <h2> Unreal Kazan</h2>
+    <button class="exit-btn" onclick="location.href='/index';">Выйти</button>
+    <div class="stadium">
+        <div class="field">
+        </div>
+        <div class="extra-seats">
+            <div class="seat" style="bottom: 10px; left: 30px;"></div>
+            <div class="seat" style="bottom: 10px; left: 130px;"></div>
+            <div class="seat" style="bottom: 10px; left: 230px;"></div>
+            <div class="seat" style="bottom: 10px; left: 330px;"></div>
+            <div class="seat" style="bottom: 10px; left: 430px;"></div>
+        </div>
+    </div>
+
+    <div class="error-message" id="error-message">Нельзя выбирать два места одновременно!</div>
+
+    <form action="/buy_ticket" method="post">
+        <input type="hidden" name="username" value="{{ username }}">
+        <input type="hidden" name="seat_number" id="selected-seat" value="">
+        <button type="submit">Купить билет</button>
+    </form>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

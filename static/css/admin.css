@@ -1,0 +1,126 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-image: url("https://www.transparenttextures.com/patterns/subtle-dots.png"); /* Добавлен фон в виде точек */
+}
+
+h1 {
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Добавлена тень к заголовку */
+}
+
+#adminSection {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    max-width: 800px; /* Ограничение ширины секции */
+}
+
+p {
+    text-align: right;
+}
+
+#gameManagementSection {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    max-width: 800px; /* Ограничение ширины секции */
+}
+
+input[type="text"],
+input[type="date"],
+select,
+#addGameForm button {
+    padding: 10px 15px; /* Увеличен отступ по горизонтали */
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Задает закругление углов */
+    font-size: 16px;
+}
+
+input[type="text"]{
+    min-width: 230px;
+}
+
+#addGameForm button {
+    background-color: #2e8b57; /* Темно-зеленый цвет */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Добавлена анимация для изменения цвета фона */
+}
+
+input[type="text"],
+input[type="date"],
+select,
+#addGameForm button {
+    transition: all 0.3s; /* Добавляет плавную анимацию для полей ввода и кнопки */
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus,
+#addGameForm button:focus {
+    border-color: #2e8b57; /* Изменяет цвет рамки при фокусировке */
+    outline: none; /* Убирает стандартное выделение при фокусе */
+    box-shadow: 0 0 5px #2e8b57; /* Добавлена тень при фокусе */
+}
+
+#addGameForm button:hover {
+    background-color: #216f45; /* Более темный оттенок зеленого при наведении */
+}
+
+#gamesList {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+    max-width: 800px; /* Центрирование списка */
+    margin: 0 auto;
+}
+
+#gamesList li {
+    background-color: #90EE90;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    text-align: left; /* Выравнивание текста по левому краю */
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#gamesList li:hover {
+    background-color: #f0f0f0;
+}
+
+.game-item {
+    display: block;
+    margin-bottom: 10px; /* Отступ между играми */
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.game-score {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.game-date-time {
+    display: block; /* Выравнивание даты и времени под счетом */
+    font-size: 14px;
+    margin-top: 5px; /* Отступ сверху */
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление играми</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <h1>Управление играми</h1>
+
+    <div id="adminSection">
+        <h2>Добро пожаловать на страницу футбольных матчей</h2>
+        <p><a href="/logout">Выйти</a></p>
+    </div>
+
+    <div id="gameManagementSection">
+        <h2>Список игр</h2>
+        <ul id="gamesList"></ul>
+
+        <h2>Добавить новую игру</h2>
+        <form id="addGameForm">
+            <label for="team1">Команда 1:</label>
+            <input type="text" id="team1" name="team1" placeholder="Введите название Команды 1"><br><br>
+            <label for="team2">Команда 2:</label>
+            <input type="text" id="team2" name="team2" placeholder="Введите название Команды 2"><br><br>
+            <label for="date">Дата:</label>
+            <input type="date" id="date" name="date"><br><br>
+            <label for="time">Время:</label>
+            <select id="time" name="time">
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+            </select><br><br>
+            <button type="submit">Добавить игру</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

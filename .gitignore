@@ -1,0 +1,15 @@
+*.pyc
+app.db
+./tmp
+./build/*
+./.idea
+./.idea/*
+env
+venv
+*.sublime*
+.DS_Store
+**/__pycache__/
+/venv/
+.env
+instance/uploads/*
+photos/*
