@@ -103,6 +103,20 @@ select:focus,
     background-color: #f0f0f0;
 }
 
+.simulate-button {
+    background-color: #007bff; /* Цвет кнопки */
+    color: #fff; /* Цвет текста кнопки */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border: none; /* Убирает границу кнопки */
+    border-radius: 5px; /* Закругленные углы кнопки */
+    cursor: pointer; /* Указатель курсора при наведении на кнопку */
+    transition: background-color 0.3s; /* Плавное изменение цвета фона */
+}
+
+.simulate-button:hover {
+    background-color: #0056b3; /* Цвет кнопки при наведении */
+}
+
 .game-item {
     display: block;
     margin-bottom: 10px; /* Отступ между играми */

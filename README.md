@@ -1,18 +1,19 @@
 # FClub
 
-
 ## Description
-сайт на flask
-
-Веб-приложение для футбольного клуба с применением СУБД Mysql
-Ннужно реализовать функцию покупки билетов на матчи и функцию симуляции (проигрывания) футбольных матчей с последующим обновлением турнирной таблицы с сортировкой по набранным очкам команд
-там что- то начато, но на сайте пока все что есть: окна регистрации и авторизации, страница администратора где можно добавлять новые матчи и страница пользователя где можно только смотреть расписание матчей, которые администратор опубликовал
+Веб-приложение для футбольного клуба с применением СУБД SQLite. Приложение включает в себя функции регистрации и авторизации пользователей, страницу администратора для управления матчами, функцию покупки билетов на матчи, симуляцию матчей с последующим обновлением турнирной таблицы, а также страницу пользователя для просмотра расписания матчей.
 
 ### Features
+- Регистрация и авторизация пользователей
+- Страница администратора для добавления новых матчей и симуляции матчей
+- Страница пользователя для просмотра расписания матчей
+- Покупка билетов на матчи
+- Обновление турнирной таблицы на основе результатов матчей
 
 ## Technologies Used
 - **Python 3**: Core programming language.
 - **Flask**: Web framework used to create the web application.
+- **SQLite**: Database management system used for storing data.
 
 ## Setup
 To set up the app locally, follow these steps:
@@ -36,21 +37,14 @@ To set up the app locally, follow these steps:
 5. Set environment variables:
     ```sh
     export FLASK_APP=run.py
-    export FLASK_RUN_PORT=5002
     export FLASK_ENV=development
     ```
-### Configuratio
-copy .env.example to .env
-set OPENAI_API_KEY
 
 ### Running the App
-    To run the application, execute:
+To run the application, execute:
     ```sh
     flask run
     ```
 
 ### Author
 Sergey Chernyakov
-
-### Ngrok
-ngrok http 5002

@@ -46,11 +46,16 @@ def create_tables() -> None:
         )
     """)
     
+    # cursor.execute("DROP TABLE IF EXISTS seats")
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS seats (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             game_id INTEGER,
-            seat TEXT,
+            sector TEXT,
+            row INTEGER,
+            seat INTEGER,
+            price REAL,
             purchased INTEGER DEFAULT 0,
             FOREIGN KEY (game_id) REFERENCES games(id)
         )

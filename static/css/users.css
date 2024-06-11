@@ -78,7 +78,7 @@ a:hover {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  max-width: 500px;
+  max-width: 830px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   text-align: left;
 }
@@ -112,26 +112,82 @@ a:hover {
   border-radius: 10px;
 }
 
-.sector {
+.overlay {
   position: absolute;
+  border: 2px solid rgb(145, 144, 144);
+  pointer-events: auto;
+  display: none;
+  cursor: pointer;
+}
+
+#overlayA {
+  top: 30px;
+  left: 150px;
+  width: 520px;
+  height: 135px;
+}
+
+#overlayD {
+  top: 170px;
+  left: 630px;
+  width: 153px;
+  height: 330px;
+}
+
+#overlayB {
+  top: 170px;
+  left: 40px;
+  width: 153px;
+  height: 330px;
+}
+
+#overlayC {
+  top: 450px;
+  left: 200px;
+  width: 420px;
+  height: 145px;
+}
+
+#seatsContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seat-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.row-label {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.seat {
   width: 50px;
   height: 50px;
-  background-color: rgba(0, 123, 255, 0.5);
-  color: white;
+  background-color: #90EE90;
+  margin: 5px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  align-items: center;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.sector:hover {
-  background-color: rgba(0, 123, 255, 0.7);
+.seat:hover {
+  background-color: #77dd77;
 }
 
-.sector.selected {
-  background-color: #90EE90;
+.seat.sold {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
 }
 
 .buy-button {
@@ -141,6 +197,7 @@ a:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 10px; /* Отступ между элементами */
 }
 
 .buy-button:hover {
@@ -152,8 +209,29 @@ a:hover {
   color: green;
 }
 
+.form-container {
+  display: flex;
+  align-items: center;
+}
+
+#sector, #row, #seat {
+  height: 40px; /* Высота как у кнопки */
+  padding: 5px;
+  margin-left: 10px; /* Отступ между элементами */
+}
+
 @media (max-width: 600px) {
   .modal-content {
       width: 90%;
   }
+}
+
+.seat.selected {
+  background-color: #d3d3d3; /* Gray color for selected seats */
+  cursor: pointer;
+}
+
+.seat.purchased {
+  background-color: #d3d3d3; /* Gray color for purchased seats */
+  cursor: not-allowed;
 }

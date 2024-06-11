@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Турнирная таблица</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tournament.css') }}">
+</head>
+<body>
+    <h1>Турнирная таблица</h1>
+
+    <div id="tournamentTableSection">
+        <h2>Добро пожаловать на страницу Турнирной таблицы</h2>
+        <p><a href="/logout">Выйти</a></p>
+    </div>
+
+    <div id="tournamentTableSection">
+        <h2>Таблица команд</h2>
+        <table id="tournamentTable">
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Очки</th>
+                </tr>
+            </thead>
+            <tbody id="teamsList">
+                <!-- Список команд будет динамически загружен сюда -->
+            </tbody>
+        </table>
+    </div>
+    <script src="{{ url_for('static', filename='js/tournament.js') }}"></script>
+</body>
+</html>

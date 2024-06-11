@@ -1,5 +1,6 @@
 let canSelectSeat = true;
 let selectedGameId = null;
+let selectedSeat = null; // Variable to keep track of the currently selected seat
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchGamesList();
@@ -41,30 +42,6 @@ function fetchGamesList() {
 function openModal(gameId) {
     selectedGameId = gameId;
     const modal = document.getElementById('ticketModal');
-    const stadium = document.getElementById('stadium');
-    stadium.innerHTML = '';
-    fetchPurchasedSeats(gameId).then(purchasedSeats => {
-        for (let i = 0; i < 4; i++) {
-            const seat = document.createElement('div');
-            seat.className = 'seat left';
-            if (purchasedSeats.includes(`left-${i}`)) {
-                seat.classList.add('purchased');
-            }
-            seat.dataset.seatId = `left-${i}`;
-            seat.onclick = () => toggleSeatColor(seat);
-            stadium.appendChild(seat);
-        }
-        for (let i = 0; i < 4; i++) {
-            const seat = document.createElement('div');
-            seat.className = 'seat right';
-            if (purchasedSeats.includes(`right-${i}`)) {
-                seat.classList.add('purchased');
-            }
-            seat.dataset.seatId = `right-${i}`;
-            seat.onclick = () => toggleSeatColor(seat);
-            stadium.appendChild(seat);
-        }
-    });
     modal.style.display = 'block';
 }
 
@@ -73,13 +50,13 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-function fetchPurchasedSeats(gameId) {
+function fetchPurchasedSeats(gameId, sector) {
     return fetch('/get_purchased_seats', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ game_id: gameId })
+        body: JSON.stringify({ game_id: gameId, sector: sector })
     })
     .then(response => response.json())
     .then(data => data.seats || [])
@@ -110,12 +87,18 @@ function toggleSeatColor(seat) {
     seat.classList.toggle('red');
 }
 
-function buyTicket() {
-    const selectedSeat = document.querySelector('.seat.red');
-    if (!selectedSeat) {
+function buyTicket(event) {
+    event.preventDefault();
+    const sector = document.getElementById('sector').value;
+    const row = document.getElementById('row').value;
+    const seat = document.getElementById('seat').value;
+    const price = document.getElementById('price').value;
+
+    if (!sector || !row || !seat || !price) {
         showMessage('Пожалуйста, выберите место перед покупкой.');
         return;
     }
+
     fetch('/buy_seat', {
         method: 'POST',
         headers: {
@@ -123,15 +106,22 @@ function buyTicket() {
         },
         body: JSON.stringify({
             game_id: selectedGameId,
-            seat: selectedSeat.dataset.seatId
+            sector: sector,
+            row: row,
+            seat: seat,
+            price: price
         })
     })
     .then(response => response.json())
     .then(data => {
         if (data.message === 'Билет успешно куплен') {
-            selectedSeat.classList.add('purchased');
-            selectedSeat.classList.remove('red');
-            showMessage('Билет куплен!');
+            const selectedSeatDiv = document.querySelector(`.seat[data-row="${row}"][data-seat="${seat}"]`);
+            if (selectedSeatDiv) {
+                selectedSeatDiv.classList.add('purchased');
+                selectedSeatDiv.classList.remove('red');
+            }
+            alert(`Билет куплен! Сектор: ${sector}, Ряд: ${row}, Место: ${seat}`);
+            closeModal();
         } else {
             showMessage('Ошибка покупки билета: ' + data.message);
         }
@@ -149,4 +139,68 @@ function showMessage(text) {
     setTimeout(() => {
         message.style.display = 'none';
     }, 2000);
+}
+
+function showOverlay(sector, price) {
+    document.getElementById('overlay' + sector).style.display = 'block';
+    document.getElementById('price').innerText = 'Цена билета: ' + price + ' рублей';
+}
+
+function hideOverlay(sector) {
+    document.getElementById('overlay' + sector).style.display = 'none';
+}
+
+function showSeats(sector, price) {
+    fetchPurchasedSeats(selectedGameId, sector).then(purchasedSeats => {
+        const seatsContainer = document.getElementById('seatsContainer');
+        const selectedSectorDisplay = document.getElementById('selectedSectorDisplay');
+        seatsContainer.innerHTML = ''; // Очистить текущие места
+        selectedSectorDisplay.innerHTML = `<h3>Выбранный сектор: ${sector}</h3>`;
+        document.getElementById('sector').value = sector;
+        document.getElementById('price').value = price;
+
+        for (let row = 1; row <= 7; row++) {
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'seat-row';
+
+            const rowLabelLeft = document.createElement('div');
+            rowLabelLeft.className = 'row-label';
+            rowLabelLeft.innerText = row;
+            rowDiv.appendChild(rowLabelLeft);
+
+            for (let seat = 1; seat <= 10; seat++) {
+                const seatDiv = document.createElement('div');
+                seatDiv.className = 'seat';
+                seatDiv.innerText = seat;
+                seatDiv.dataset.row = row;
+                seatDiv.dataset.seat = seat;
+
+                if (purchasedSeats.some(s => s.row === row && s.seat === seat)) {
+                    seatDiv.classList.add('purchased');
+                    seatDiv.onclick = null;
+                } else {
+                    seatDiv.onclick = () => selectSeat(row, seat);
+                }
+
+                rowDiv.appendChild(seatDiv);
+            }
+
+            const rowLabelRight = document.createElement('div');
+            rowLabelRight.className = 'row-label';
+            rowLabelRight.innerText = row;
+            rowDiv.appendChild(rowLabelRight);
+
+            seatsContainer.appendChild(rowDiv);
+        }
+    });
+}
+
+function selectSeat(row, seatNumber) {
+    if (selectedSeat) {
+        selectedSeat.classList.remove('selected');
+    }
+    selectedSeat = document.querySelector(`.seat[data-row="${row}"][data-seat="${seatNumber}"]`);
+    selectedSeat.classList.add('selected');
+    document.getElementById('row').value = row;
+    document.getElementById('seat').value = seatNumber;
 }

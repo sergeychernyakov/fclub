@@ -23,22 +23,30 @@
                 <h2>Купить Билет</h2>
                 <div class="field">
                     <div class="stadium" id="stadium">
-                        <img src="{{ url_for('static', filename='img/schema.jpg') }}" usemap="#stadium-map" alt="Схема стадиона">
+                        <img src="{{ url_for('static', filename='img/schema.jpg') }}" usemap="#stadium-map" alt="Схема стадиона" class="stadium-image">
+                        <div class="overlay" id="overlayA" onclick="showSeats('A', 500)"></div>
+                        <div class="overlay" id="overlayB" onclick="showSeats('B', 600)"></div>
+                        <div class="overlay" id="overlayC" onclick="showSeats('C', 800)"></div>
+                        <div class="overlay" id="overlayD" onclick="showSeats('D', 700)"></div>
                         <map name="stadium-map">
-                            <area shape="rect" coords="34,44,270,350" alt="Сектор A" data-sector="A" data-price="500" onclick="selectSector('A', 500)">
-                            <area shape="rect" coords="280,44,520,350" alt="Сектор B" data-sector="B" data-price="700" onclick="selectSector('B', 700)">
-                            <!-- Добавьте остальные области сектора -->
+                            <area shape="rect" coords="150,30,670,165" alt="Западная трибуна A" data-sector="A" data-price="500" onmouseover="showOverlay('A', 500)" onmouseout="hideOverlay('A')">
+                            <area shape="rect" coords="630,170,783,500" alt="Северная трибуна D" data-sector="D" data-price="700" onmouseover="showOverlay('D', 700)" onmouseout="hideOverlay('D')">
+                            <area shape="rect" coords="40,170,193,500" alt="Южная трибуна B" data-sector="B" data-price="600" onmouseover="showOverlay('B', 600)" onmouseout="hideOverlay('B')">
+                            <area shape="rect" coords="200,450,620,595" alt="Восточная трибуна C" data-sector="C" data-price="800" onmouseover="showOverlay('C', 800)" onmouseout="hideOverlay('C')">
                         </map>
                     </div>
+                    <div id="selectedSectorDisplay"></div>
+                    <div id="seatsContainer"></div>
                     <p id="price">Цена билета: </p>
                 </div>
-                <form id="buyTicketForm">
-                    <input type="hidden" name="game_id" id="selectedGameId">
-                    <input type="hidden" name="sector" id="selectedSector">
+                <form id="buyTicketForm" class="form-container" onsubmit="buyTicket(event)">
+                    <label for="sector">Сектор:</label>
+                    <input type="text" id="sector" name="sector" readonly>
                     <label for="row">Ряд:</label>
                     <input type="number" id="row" name="row" required>
                     <label for="seat">Место:</label>
                     <input type="number" id="seat" name="seat" required>
+                    <input type="hidden" id="price" name="price">
                     <button class="buy-button" type="submit">Купить Билет</button>
                 </form>
                 <div id="message" class="message"></div>
@@ -46,7 +54,6 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/stadium.js') }}"></script>
     <script src="{{ url_for('static', filename='js/users.js') }}"></script>
 </body>
 </html>
